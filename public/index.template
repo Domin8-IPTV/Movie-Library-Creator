@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>_NAME_</title>
+
+		<link rel="stylesheet" type="text/css" href="app.min.css">
+		<script type="text/javascript">
+			var Data = _DATA_;
+			var ImageBaseUrl = '_IMAGE_BASE_URL_';
+		</script>
+		<script type="text/javascript" src="app.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>_NAME_</h1>
+
+			<div id="movie-list">
+				<ul class="list media-list"></ul>
+			</div>
+		</div>
+	</body>
+</html>

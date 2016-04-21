@@ -1,0 +1,23 @@
+{
+  "name": "movies",
+  "authors": [
+    "Tim Helfensdörfer <tim@visualappeal.de>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "4.0.*",
+    "list.js": "1.2.*",
+    "font-awesome": "fontawesome#^4.6.1"
+  }
+}
