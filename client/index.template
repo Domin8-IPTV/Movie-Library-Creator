@@ -17,6 +17,13 @@
 			<h1>_NAME_</h1>
 
 			<div id="movie-list">
+				<div class="row">
+					<div class="col-md-6">
+						<input class="search form-control" placeholder="Search..." />
+					</div>
+				</div>
+
+
 				<ul class="list media-list"></ul>
 			</div>
 		</div>

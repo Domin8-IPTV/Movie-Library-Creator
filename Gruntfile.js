@@ -25,6 +25,14 @@ module.exports = function(grunt) {
                     src: '**',
                     dest: 'public/fonts'
                 }]
+            },
+            images: {
+                files: [{
+                    expand: true,
+                    cwd: 'client/assets/images',
+                    src: '**',
+                    dest: 'public/images'
+                }]
             }
         },
         watch: {

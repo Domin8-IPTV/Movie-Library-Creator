@@ -21,7 +21,7 @@ function search_for_movie($name, $hash, $themoviedb, $climate, &$cache) {
     $searchResults = $themoviedb->searchMovie($name);
 
     if (count($searchResults) === 1) {
-        $climate->comment(sprintf('Found %s (%s)', $searchResults[0]->title, $searchResults[0]->release_date));
+        $climate->whisper(sprintf('Found %s (%s)', $searchResults[0]->title, $searchResults[0]->release_date));
 
         $meta = $searchResults[0];
         $cache[$hash] = $meta;
@@ -38,7 +38,7 @@ function search_for_movie($name, $hash, $themoviedb, $climate, &$cache) {
             $responses[$title] = $result;
         }
 
-        $climate->whisper(sprintf('Multiple results were found for "%s":', $name));
+        $climate->comment(sprintf('Multiple results were found for "%s":', $name));
         $input = $climate->radio('Please choose:', $options);
 
         $response = $input->prompt();
@@ -118,7 +118,14 @@ $climate->arguments->add([
 ]);
 
 // Parse cli options
-$climate->arguments->parse();
+try {
+    $climate->arguments->parse();
+} catch (\Exception $e) {
+    $climate->error('Invalid command line options!');
+    $climate->usage();
+
+    exit(1);
+}
 
 // Movie path
 $dir = $climate->arguments->get('movies');
@@ -169,7 +176,13 @@ $contents = $filesystem->listContents(null, true);
 $movies = [];
 
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
-$ffprobe = FFMpeg\FFProbe::create();
+
+try {
+    $ffprobe = FFMpeg\FFProbe::create();
+} catch (\Exception $e) {
+    $climate->error($e->getMessage());
+    exit(1);
+}
 
 foreach ($contents as $object) {
     $path = $dir . $object['path'];

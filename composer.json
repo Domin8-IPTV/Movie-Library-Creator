@@ -9,8 +9,8 @@
     "minimum-stability": "stable",
     "require": {
         "league/climate": "3.2.*",
-        "league/flysystem": "^1.0",
-        "php-ffmpeg/php-ffmpeg": "^0.6.1",
-        "guzzlehttp/guzzle": "^6.2"
+        "league/flysystem": "1.0.*",
+        "php-ffmpeg/php-ffmpeg": "0.6.*",
+        "guzzlehttp/guzzle": "6.2.*"
     }
 }

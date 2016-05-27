@@ -18,6 +18,6 @@
   "dependencies": {
     "bootstrap": "4.0.*",
     "list.js": "1.2.*",
-    "font-awesome": "fontawesome#^4.6.1"
+    "font-awesome": "4.6.*"
   }
 }

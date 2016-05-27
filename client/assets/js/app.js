@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 			// Meta data
 			movieData['id'] = Data.movies[movie].meta['id'];
-			movieData['poster_path'] = ImageBaseUrl + IMAGE_POSTER_FORMAT + Data.movies[movie].meta['poster_path'];
+			movieData['poster_path'] = (Data.movies[movie].meta['poster_path'] != null)
+				? ImageBaseUrl + IMAGE_POSTER_FORMAT + Data.movies[movie].meta['poster_path']
+				: "images/placeholder.png";
 			movieData['title'] = Data.movies[movie].meta['title'];
 			movieData['overview'] = Data.movies[movie].meta['overview'];
 			movieData['vote_count'] = Data.movies[movie].meta['vote_count'];
@@ -20,15 +22,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			// Resolution
 			var resolution;
 			var height = Math.round(Number(Data.movies[movie].height));
-			if (height > 2100)
+			var width = Math.round(Number(Data.movies[movie].width));
+			if (width >= 3840)
 				resolution = '4K';
-			else if (height > 1000)
+			else if (width >= 1920)
 				resolution = '1080p';
-			else if (height > 600)
+			else if (width >= 1280)
 				resolution = '720p';
 			else
 				resolution = 'SD';
 			movieData['resolution'] = resolution;
+			movieData['resolutionText'] = width + 'x' + height + 'px';
 
 			// Languages
 			var languages = [];
@@ -58,7 +62,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					'languages',
 					'vote_count',
 					'vote_average',
-					'resolution'
+					'resolution',
+					'resolutionText'
 				]
 			},
 			'title',
@@ -105,13 +110,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			// Resolution
 			var resolution = item.dataset.resolution;
 			if (resolution == '4K')
-				resolution = '<span class="label label-primary">4K</span>';
+				resolution = '<span class="label label-primary" title="' + item.dataset.resolutiontext + '">4K</span>';
 			else if (resolution == '1080p')
-				resolution = '<span class="label label-success">1080p</span>';
+				resolution = '<span class="label label-success" title="' + item.dataset.resolutiontext + '">1080p</span>';
 			else if (resolution == '720p')
-				resolution = '<span class="label label-warning">720p</span>';
+				resolution = '<span class="label label-warning" title="' + item.dataset.resolutiontext + '">720p</span>';
 			else
-				resolution = '<span class="label label-danger">SD</span>';
+				resolution = '<span class="label label-danger" title="' + item.dataset.resolutiontext + '">SD</span>';
 			headline.insertAdjacentHTML('beforeend', ' ' + resolution);
 
 			// Languages
